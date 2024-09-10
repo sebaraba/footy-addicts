@@ -6,4 +6,3 @@ apps/app.backend/.env
 apps/app.backend/.env.local
 apps/app.backend/.env.development
 apps/app.backend/.env.production
-
