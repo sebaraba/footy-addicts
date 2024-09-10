@@ -1,5 +1,11 @@
 import { Router } from 'express';
-import { getCourts, getCourt, createCourt, updateCourt, deleteCourt } from '../controllers/courtController';
+import {
+  getCourts,
+  getCourt,
+  createCourt,
+  updateCourt,
+  deleteCourt,
+} from '../controllers/courtController';
 
 const router = Router();
 

@@ -1,5 +1,11 @@
 import { Router } from 'express';
-import { getSportBases, getSportBase, createSportBase, updateSportBase, deleteSportBase } from '../controllers/sportBaseController';
+import {
+  getSportBases,
+  getSportBase,
+  createSportBase,
+  updateSportBase,
+  deleteSportBase,
+} from '../controllers/sportBaseController';
 
 const router = Router();
 

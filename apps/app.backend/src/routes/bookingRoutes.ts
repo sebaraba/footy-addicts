@@ -1,5 +1,11 @@
 import { Router } from 'express';
-import { getBookings, getBooking, createBooking, updateBooking, deleteBooking } from '../controllers/bookingController';
+import {
+  getBookings,
+  getBooking,
+  createBooking,
+  updateBooking,
+  deleteBooking,
+} from '../controllers/bookingController';
 
 const router = Router();
 
