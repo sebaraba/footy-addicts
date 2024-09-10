@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
@@ -6,6 +8,8 @@ import ownerRoutes from './routes/ownerRoutes';
 import sportBaseRoutes from './routes/sportBaseRoutes';
 import courtRoutes from './routes/courtRoutes';
 import bookingRoutes from './routes/bookingRoutes';
+
+dotenv.config();
 
 const app = express();
 const port = 3000;
@@ -20,9 +24,18 @@ app.use('/sport-bases', sportBaseRoutes);
 app.use('/courts', courtRoutes);
 app.use('/bookings', bookingRoutes);
 
+// Read the connection string from environment variables
+const dbConnectionString = process.env.DB_CONNECTION_STRING;
+
+if (!dbConnectionString) {
+  throw new Error(
+    'DB_CONNECTION_STRING is not defined in the environment variables'
+  );
+}
+
 // Connect to MongoDB
 mongoose
-  .connect('mongodb://localhost:27017/football_booking')
+  .connect(dbConnectionString)
   .then(() => console.log('MongoDB connected'))
   .catch((err) =>
     console.error('MongoDB connection error:', err)

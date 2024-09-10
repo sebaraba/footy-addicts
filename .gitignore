@@ -1,3 +1,8 @@
 .idea
 
 apps/app.backend/node_modules
+apps/app.backend/dist
+apps/app.backend/.env
+apps/app.backend/.env.local
+apps/app.backend/.env.development
+apps/app.backend/.env.production
