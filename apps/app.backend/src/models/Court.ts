@@ -9,7 +9,11 @@ interface ICourt extends Document {
 const CourtSchema: Schema = new Schema({
   name: { type: String, required: true },
   available: { type: Boolean, required: true },
-  sportBase: { type: Schema.Types.ObjectId, ref: 'SportBase', required: true },
+  sportBase: {
+    type: Schema.Types.ObjectId,
+    ref: 'SportBase',
+    required: true,
+  },
 });
 
 export default mongoose.model<ICourt>('Court', CourtSchema);

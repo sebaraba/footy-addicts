@@ -12,4 +12,7 @@ const CustomerSchema: Schema = new Schema({
   phone: { type: String, required: true },
 });
 
-export default mongoose.model<ICustomer>('Customer', CustomerSchema);
+export default mongoose.model<ICustomer>(
+  'Customer',
+  CustomerSchema
+);
