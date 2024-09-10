@@ -1,5 +1,11 @@
 import { Router } from 'express';
-import { getOwners, getOwner, createOwner, updateOwner, deleteOwner } from '../controllers/ownerController';
+import {
+  getOwners,
+  getOwner,
+  createOwner,
+  updateOwner,
+  deleteOwner,
+} from '../controllers/ownerController';
 
 const router = Router();
 

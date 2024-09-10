@@ -21,9 +21,10 @@ app.use('/courts', courtRoutes);
 app.use('/bookings', bookingRoutes);
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/football_booking')
+mongoose
+  .connect('mongodb://localhost:27017/football_booking')
   .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+  .catch((err) => console.error('MongoDB connection error:', err));
 
 // Start the server
 app.listen(port, () => {
