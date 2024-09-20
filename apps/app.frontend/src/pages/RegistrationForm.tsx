@@ -14,7 +14,7 @@ import {
   Container,
 } from "@chakra-ui/react";
 
-export const RegistrationForm = () => {
+const RegistrationForm = () => {
   const colSpan = useBreakpointValue({ base: 2, md: 1 });
 
   return (
@@ -77,3 +77,5 @@ export const RegistrationForm = () => {
     </Container>
   );
 };
+
+export default RegistrationForm;

@@ -1,4 +1,5 @@
 .idea
+.vite
 
 node_modules
 apps/app.backend/dist
