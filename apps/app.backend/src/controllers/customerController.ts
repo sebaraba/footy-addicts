@@ -52,15 +52,28 @@ export const getCustomer = [
 ];
 
 export const createCustomer = [
-  body('name')
+  body('first_name')
     .isString()
-    .withMessage('Name must be a string'),
+    .withMessage('First Name must be a string'),
+  body('last_name')
+    .isString()
+    .withMessage('Last Name must be a string'),
   body('email')
     .isEmail()
     .withMessage('Invalid email format'),
   body('phone')
     .isString()
     .withMessage('Phone must be a string'),
+  body('address')
+    .isString()
+    .withMessage('Address must be a string'),
+  body('city')
+    .isString()
+    .withMessage('City must be a string'),
+  body('country')
+    .isString()
+    .withMessage('Country must be a string'),
+
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
