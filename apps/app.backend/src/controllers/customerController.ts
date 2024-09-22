@@ -52,10 +52,10 @@ export const getCustomer = [
 ];
 
 export const createCustomer = [
-  body('first_name')
+  body('firstName')
     .isString()
     .withMessage('First Name must be a string'),
-  body('last_name')
+  body('lastName')
     .isString()
     .withMessage('Last Name must be a string'),
   body('email')
@@ -98,11 +98,11 @@ export const createCustomer = [
 
 export const updateCustomer = [
   param('id').isMongoId().withMessage('Invalid ID format'),
-  body('first_name')
+  body('firstName')
     .optional()
     .isString()
     .withMessage('First Name must be a string'),
-  body('last_name')
+  body('lastName')
     .optional()
     .isString()
     .withMessage('Last Name must be a string'),
