@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 import {
   VStack,
   GridItem,
@@ -14,6 +13,7 @@ import {
   Text,
   Container,
 } from "@chakra-ui/react";
+import { createCustomer } from "../services/customerService";
 
 const RegistrationForm = () => {
   const colSpan = useBreakpointValue({ base: 2, md: 1 });
@@ -23,6 +23,8 @@ const RegistrationForm = () => {
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("usa");
+  const [email, setEmail] = useState(""); // State for Email
+  const [phone, setPhone] = useState(""); // State for Phone Number
 
   const handleSubmit = async () => {
     const customerData = {
@@ -31,12 +33,14 @@ const RegistrationForm = () => {
       address,
       city,
       country,
+      email,
+      phone,
     };
 
     console.log("Customer data:", customerData);
 
     try {
-      const response = await axios.post("/https/customers", customerData);
+      const response = await createCustomer(customerData);
       console.log("Customer created:", response.data);
     } catch (error) {
       console.error("Error creating customer:", error);
@@ -67,6 +71,28 @@ const RegistrationForm = () => {
                 placeholder="Doe"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
+              />
+            </FormControl>
+          </GridItem>
+
+          <GridItem colSpan={colSpan}>
+            <FormControl>
+              <FormLabel>Email</FormLabel>
+              <Input
+                placeholder="john.doe@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </FormControl>
+          </GridItem>
+
+          <GridItem colSpan={colSpan}>
+            <FormControl>
+              <FormLabel>Phone Number</FormLabel>
+              <Input
+                placeholder="0722789012"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
               />
             </FormControl>
           </GridItem>
