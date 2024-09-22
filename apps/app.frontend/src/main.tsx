@@ -4,12 +4,15 @@ import { BrowserRouter } from "react-router-dom";
 import { App } from "./App.tsx";
 import "./index.css";
 import { ChakraProvider } from "@chakra-ui/react";
+import ProtectedComponent from "./components/ProtectedComponent.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ChakraProvider>
       <BrowserRouter>
-        <App />
+        <ProtectedComponent>
+          <App />
+        </ProtectedComponent>
       </BrowserRouter>
     </ChakraProvider>
   </StrictMode>,
