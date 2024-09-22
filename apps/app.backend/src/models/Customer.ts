@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 interface ICustomer extends Document {
-  first_name: string;
+  firstName: string;
   last_name: string;
   email: string;
   phone: string;
@@ -11,8 +11,8 @@ interface ICustomer extends Document {
 }
 
 const CustomerSchema: Schema = new Schema({
-  first_name: { type: String, required: true },
-  last_name: { type: String, required: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   phone: { type: String, required: true },
   address: { type: String, required: true },
