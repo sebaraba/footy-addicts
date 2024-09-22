@@ -98,10 +98,14 @@ export const createCustomer = [
 
 export const updateCustomer = [
   param('id').isMongoId().withMessage('Invalid ID format'),
-  body('name')
+  body('first_name')
     .optional()
     .isString()
-    .withMessage('Name must be a string'),
+    .withMessage('First Name must be a string'),
+  body('last_name')
+    .optional()
+    .isString()
+    .withMessage('Last Name must be a string'),
   body('email')
     .optional()
     .isEmail()
@@ -110,6 +114,18 @@ export const updateCustomer = [
     .optional()
     .isString()
     .withMessage('Phone must be a string'),
+  body('address')
+    .optional()
+    .isString()
+    .withMessage('Address must be a string'),
+  body('city')
+    .optional()
+    .isString()
+    .withMessage('City must be a string'),
+  body('country')
+    .optional()
+    .isString()
+    .withMessage('Country must be a string'),
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
