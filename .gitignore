@@ -1,5 +1,6 @@
 .idea
 .vite
+.env
 
 node_modules
 apps/app.backend/dist

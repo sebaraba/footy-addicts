@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -14,8 +15,15 @@ dotenv.config();
 const app = express();
 const port = 3000;
 
+// Configure CORS to whitelist local frontend URL
+const corsOptions = {
+  origin: 'http://localhost:5173', // Replace with your frontend URL
+};
+
 // Middleware
 app.use(bodyParser.json());
+app.use(cors(corsOptions));
+app.use(express.json());
 
 // Routes
 app.use('/customers', customerRoutes);
