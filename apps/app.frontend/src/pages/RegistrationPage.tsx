@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { createCustomer } from "../services/customerService";
 
-const RegistrationForm = () => {
+const RegistrationPage = () => {
   const colSpan = useBreakpointValue({ base: 2, md: 1 });
 
   const [firstName, setFirstName] = useState("");
@@ -159,4 +159,4 @@ const RegistrationForm = () => {
   );
 };
 
-export default RegistrationForm;
+export default RegistrationPage;
