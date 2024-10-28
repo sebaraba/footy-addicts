@@ -24,7 +24,10 @@ export const getCustomerById = async (id: string) => {
 
 export const createCustomer = async (customerData: any) => {
   try {
-    const response = await axios.post(API_URL, customerData);
+    const response = await axios.post(
+      `${process.env.VITE_API_AUTH_URL}/register`,
+      customerData,
+    );
     return response.data;
   } catch (error) {
     console.error("Error creating customer:", error);
