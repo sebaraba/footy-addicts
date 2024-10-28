@@ -10,28 +10,28 @@ import {
   Text,
   Link,
 } from "@chakra-ui/react";
-import { register } from "../services/authService";
+import { login } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 
-const RegistrationPage = () => {
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
     try {
-      await register({ email, password });
-      // Redirect to login page
-      navigate("/login");
+      await login({ email, password });
+      // Redirect to protected page
+      navigate("/");
     } catch (error) {
-      console.error("Error registering:", error);
+      console.error("Error logging in:", error);
     }
   };
 
   return (
     <Container centerContent={true}>
-      <Heading size="2xl">Register</Heading>
-      <Text>If you already have an account, click here to log in.</Text>
+      <Heading size="2xl">Login</Heading>
+      <Text>If you don't have an account, click here to register.</Text>
       <VStack w="full" h="full" p={10} spacing={10} alignItems="flex-start">
         <FormControl>
           <FormLabel>Email</FormLabel>
@@ -51,14 +51,14 @@ const RegistrationPage = () => {
           />
         </FormControl>
         <Button size="lg" w="full" colorScheme="blue" onClick={handleSubmit}>
-          Register
+          Login
         </Button>
-        <Link color="blue.500" onClick={() => navigate("/login")}>
-          Already have an account? Login here.
+        <Link color="blue.500" onClick={() => navigate("/register")}>
+          Don't have an account? Register here.
         </Link>
       </VStack>
     </Container>
   );
 };
 
-export default RegistrationPage;
+export default LoginPage;

@@ -4,6 +4,7 @@ import cors from 'cors';
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import authRoutes from './routes/authRoutes';
 import customerRoutes from './routes/customerRoutes';
 import ownerRoutes from './routes/ownerRoutes';
 import sportBaseRoutes from './routes/sportBaseRoutes';
@@ -24,6 +25,9 @@ const corsOptions = {
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 app.use(express.json());
+
+// Add auth routes
+app.use('/auth', authRoutes);
 
 // Routes
 app.use('/customers', customerRoutes);
