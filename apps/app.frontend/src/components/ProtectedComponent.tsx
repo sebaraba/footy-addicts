@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { isAuthenticated } from "../services/authService";
+import { getToken, isTokenValid } from "../utils/auth.ts";
 
 const ProtectedComponent = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate();
@@ -8,7 +8,9 @@ const ProtectedComponent = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const publicPaths = ["/register"];
-    if (!isAuthenticated() && !publicPaths.includes(location.pathname)) {
+    const token = getToken();
+
+    if (!isTokenValid(token) && !publicPaths.includes(location.pathname)) {
       navigate("/login");
     }
   }, [navigate, location.pathname]);
