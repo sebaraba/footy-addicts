@@ -9,12 +9,14 @@ import {
 } from "@chakra-ui/react";
 
 export interface CardHorizontalProps {
-  available: boolean;
-  name: string;
-  sportBase: string;
+  teren: {
+    available: boolean;
+    name: string;
+    sportBase: string;
+  };
 }
 
-export const CardHorizontal = (cardProps) => {
+export const CardHorizontal = (cardProps: CardHorizontalProps) => {
   const { teren } = cardProps;
 
   return (
