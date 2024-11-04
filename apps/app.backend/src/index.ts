@@ -18,7 +18,7 @@ const port = 3000;
 
 // Configure CORS to whitelist local frontend URL
 const corsOptions = {
-  origin: 'http://localhost:5173', // Replace with your frontend URL
+  origin: 'http://localhost:3001', // Replace with your frontend URL
 };
 
 // Middleware
