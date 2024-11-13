@@ -15,7 +15,7 @@ export const Header = () => {
 	};
 
 	return (
-		<Flex direction="row" align="flex-start" justify="center" w="100%" wrap="wrap" mt="100px" mb="50px">
+		<Flex direction="row" align="center" justify="space-between" w="100%" wrap="wrap" mt="100px" mb="50px" position="relative">
 			<Box maxW="300px" w="100%" display="flex" alignItems="center" ml="auto">
 				<Image
 					src={logo}
