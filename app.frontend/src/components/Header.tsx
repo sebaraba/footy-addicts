@@ -15,9 +15,16 @@ export const Header = () => {
 	};
 
 	return (
-		<Flex direction="row">
-			<Box maxW="100%">
-				<Image src={logo} alt="logo" boxSize={"100px"} mb={2} onClick={handleLogoClick} />
+		<Flex direction="row" align="flex-start" justify="center" w="100%" wrap="wrap" mt="100px" mb="50px">
+			<Box maxW="300px" w="100%" display="flex" alignItems="center" ml="auto">
+				<Image
+					src={logo}
+					alt="logo" // Adjust the logo size for responsiveness
+					mb={2}
+					onClick={handleLogoClick}
+				/>
+			</Box>
+			<Box ml="auto">
 				<Avatar
 					name="Dan Abramov"
 					src="https://bit.ly/dan-abramov"

@@ -42,7 +42,7 @@ const Login = (props: any) => {
 			</FormControl>
 
 			<Button size="lg" mt={4} w="full" colorScheme="brand" onClick={handleSubmit}>Login</Button>
-			<Link color="blue.500" m={2} onClick={() => navigate("/register")}>
+			<Link color="blue.500" m={2} onClick={() => navigate("/signup")}>
 				Don't have an account? Register here.
 			</Link>
 		</>
