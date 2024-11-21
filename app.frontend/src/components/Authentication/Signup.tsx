@@ -31,10 +31,10 @@ const Signup = () => {
 
     return (
 		<>
-			<Image src={logo} alt="logo" boxSize={"300px"} mb={2} />
+			<Image src={logo} alt="logo" boxSize={"300px"}/>
 
 			
-            <FormControl my={2}>
+            <FormControl>
 				<FormLabel>Full Name</FormLabel>
 				<Input
 					placeholder="John Doe"
@@ -98,7 +98,7 @@ const Signup = () => {
 
 			<Button size="lg" mt={4} w="full" colorScheme="brand" onClick={handleSubmit}>Register</Button>
 			
-			<Link color="blue.500" m={2} onClick={() => navigate("/login")}>
+			<Link color="blue.500" mb={4} onClick={() => navigate("/login")}>
 				You already have an account? Login here.
 			</Link>
 		</>

@@ -15,6 +15,7 @@ const Login = (props: any) => {
 			.then((response) => {
 				localStorage.setItem('token', response.data.token);
 				setIsAuthenticated(true);
+				navigate("/");
 			})
 			.catch((error) => {
 				console.log(error);

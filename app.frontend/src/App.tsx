@@ -2,14 +2,17 @@ import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { ChakraProvider, Container } from "@chakra-ui/react";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
+import { useEffect, useState } from "react";
 import HomePage from "./pages/HomePage";
 import NewRegistrationPage from "./pages/NewRegistrationPage";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import PlayerProfilePage from "./pages/PlayerProfilePage";
 import customTheme from "./theme/theme";
-import { useEffect, useState } from "react";
 import SignupPage from "./pages/SignupPage";
+import CurrentMatchPage from "./pages/CurrentMatchPage";
+import MatchesHistoryPage from "./pages/MatchesHistoryPage";
+import FavoriteFieldsPage from "./pages/FavoriteFieldsPage";
 
 export const App = () => {
 	const navigate = useNavigate();
@@ -19,14 +22,17 @@ export const App = () => {
 	});
 
 	useEffect(() => {
-		if (!isAuthenticated && location.pathname !== '/signup' && location.pathname !== '/login') {
-			navigate('/login');
-		}
-		
-		if (isAuthenticated && (location.pathname === '/login' || location.pathname === '/signup')) {
-			navigate('/');
-		}
-	}, [isAuthenticated, location.pathname, navigate]);
+
+		console.log(location.pathname);
+
+		const loginPaths = ["/login", "/signup"];
+		const currentPath = location.pathname;
+
+		// if(!isAuthenticated && !loginPaths.includes(currentPath)){
+		// 	navigate("/login");
+		// }
+
+	}, [isAuthenticated]);
 
 	return (
 	<ChakraProvider theme={customTheme}>
@@ -40,6 +46,10 @@ export const App = () => {
 					<Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
 					<Route path="/signup" element={<SignupPage />} />
 					<Route path="/player-profile" element={<PlayerProfilePage />} />
+					<Route path="/current-match" element={<CurrentMatchPage />} />
+					<Route path="/matches-history" element={<MatchesHistoryPage />} />
+					<Route path="/favorite-fields" element={<FavoriteFieldsPage />} />
+
 				</Routes>
 			{isAuthenticated && <Footer />}
 		</Container>

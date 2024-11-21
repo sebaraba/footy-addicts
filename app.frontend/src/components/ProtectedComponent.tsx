@@ -11,7 +11,7 @@ const ProtectedComponent = ({ children }: { children: React.ReactNode }) => {
     const token = getToken();
 
     if (!isTokenValid(token) && !publicPaths.includes(location.pathname)) {
-      navigate("/login");
+      // navigate("/login");
     }
   }, [navigate, location.pathname]);
 

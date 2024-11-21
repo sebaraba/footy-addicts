@@ -1,18 +1,15 @@
-import { Box, Input } from "@chakra-ui/react";
-import { FormControl, FormLabel, FormHelperText } from "@chakra-ui/react";
+import { Box, Container } from "@chakra-ui/react";
+import PlayerProfile from "/Users/macbook/Desktop/footy-addicts/apps/app.frontend/src/components/Profile/PlayerProfile.tsx";
 
 export const PlayerProfilePage = () => {
 
     return(
 
-        <Box>
-
-        <FormControl>
-            <FormLabel>Email address</FormLabel>
-            <Input type='email' />
-            <FormHelperText>We'll never share your email.</FormHelperText>
-        </FormControl>
-        </Box>
+		<Container centerContent={true}>
+			<Box bg="#F6F6F6" w="1000px" p="8" borderRadius="md" boxShadow="md">
+                <PlayerProfile/>
+            </Box>
+        </Container>
         
     
       );
