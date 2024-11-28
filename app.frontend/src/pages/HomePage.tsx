@@ -2,6 +2,7 @@ import { Box, Input, Flex } from "@chakra-ui/react"
 import { CardHorizontal } from "../components/CardHorizontal.tsx";
 import { useEffect, useState } from "react";
 import { getCourts } from "../services/courtsService.ts";
+import { CardField } from "../components/CardField.tsx";
 
 
 const HomePage = () => {
@@ -20,18 +21,23 @@ const HomePage = () => {
 	}, []);
 
 	return (
-		<Flex direction="row" justify="center" wrap="wrap" p={4}>
+		<Flex direction="column" align="center" wrap="wrap" p={4}>
 			<Box w="100%" maxW="600px" textAlign="center">
 				<Input placeholder="Search your sport base" mb={4} width="100%" size="lg" /> {/* Adds margin below the Input */}
+			</Box>
 
-				<h1>Home Page</h1>
-
-				{terenuri.map(
+			<Flex w="100%" justify="flex-start">
+				<Box maxW="600px" w="100%" mt={10}>
+					<CardField />
+				</Box>
+				
+			</Flex>
+			{/* {terenuri.map(
 					(teren: { available: boolean; name: string; sportBase: string }) => {
 						return <CardHorizontal teren={teren} key={teren.name} />;
 					},
-				)}
-			</Box>
+				)} */}
+
 		</Flex>
 	);
 };

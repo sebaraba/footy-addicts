@@ -4,6 +4,7 @@ import logo from "../../assets/logo_nostroke.svg";
 import { login } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
 
+
 const Login = (props: any) => {
 	const { setIsAuthenticated } = props;
 	const [email, setEmail] = useState('');
@@ -20,6 +21,10 @@ const Login = (props: any) => {
 			.catch((error) => {
 				console.log(error);
 			});
+	};
+
+	const handleSignup = () => {
+		navigate("/choose-signup");
 	};
 
 	return (
@@ -43,7 +48,7 @@ const Login = (props: any) => {
 			</FormControl>
 
 			<Button size="lg" mt={4} w="full" colorScheme="brand" onClick={handleSubmit}>Login</Button>
-			<Link color="blue.500" m={2} onClick={() => navigate("/signup")}>
+			<Link color="blue.500" m={2} onClick={handleSignup}>
 				Don't have an account? Register here.
 			</Link>
 		</>

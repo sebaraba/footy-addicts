@@ -2,6 +2,7 @@ import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { ChakraProvider, Container } from "@chakra-ui/react";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
+import { CardField } from "./components/CardField";
 import { useEffect, useState } from "react";
 import HomePage from "./pages/HomePage";
 import NewRegistrationPage from "./pages/NewRegistrationPage";
@@ -13,6 +14,9 @@ import SignupPage from "./pages/SignupPage";
 import CurrentMatchPage from "./pages/CurrentMatchPage";
 import MatchesHistoryPage from "./pages/MatchesHistoryPage";
 import FavoriteFieldsPage from "./pages/FavoriteFieldsPage";
+import ChooseSignupPage from "./pages/ChooseSignupPage";
+import FieldsPage from "./pages/FieldsPage"; 
+
 
 export const App = () => {
 	const navigate = useNavigate();
@@ -36,7 +40,7 @@ export const App = () => {
 
 	return (
 	<ChakraProvider theme={customTheme}>
-		<Container maxW="100%">
+		<Container maxW="100%" bg="F6F6F6">
 			{isAuthenticated && <Header />}
 				<Routes>
 					
@@ -49,6 +53,9 @@ export const App = () => {
 					<Route path="/current-match" element={<CurrentMatchPage />} />
 					<Route path="/matches-history" element={<MatchesHistoryPage />} />
 					<Route path="/favorite-fields" element={<FavoriteFieldsPage />} />
+					<Route path="/card-fields" element={<CardField />} />
+					<Route path="/choose-signup" element={<ChooseSignupPage />} />
+					<Route path="/field-page" element={<FieldsPage />} />
 
 				</Routes>
 			{isAuthenticated && <Footer />}
