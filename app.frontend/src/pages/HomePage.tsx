@@ -1,19 +1,18 @@
 import { Box, Input, Flex } from "@chakra-ui/react"
-import { CardHorizontal } from "../components/CardHorizontal.tsx";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getCourts } from "../services/courtsService.ts";
 import { CardField } from "../components/CardField.tsx";
 
 
 const HomePage = () => {
-	const [terenuri, setTerenuri] = useState([]);
+	// const [terenuri, setTerenuri] = useState([]);
 
 	useEffect(() => {
 		getCourts()
 			.then((data) => {
 				console.log("data", data);
 
-				setTerenuri(data);
+				// setTerenuri(data);
 			})
 			.catch((error) => {
 				console.error("Error fetching courts:", error);

@@ -4,7 +4,8 @@ import logo from "../../assets/logo_nostroke.svg";
 import { register } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
 
-const Signup = () => {
+const Signup = (props: any) => {
+	const { isAdmin } = props;
   
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState("");
@@ -19,7 +20,7 @@ const Signup = () => {
     const navigate = useNavigate();
     const handleSubmit = () => {
 
-        register({ email, password, username, fullName, phone, address, city, country})
+        register({ email, password, username, fullName, phone, address, city, country, isAdmin})
             .then((response) => {
                 localStorage.setItem('token', response.data.token);
             })
@@ -28,6 +29,8 @@ const Signup = () => {
             });
 
     };
+
+	console.log(isAdmin);
 
     return (
 		<>

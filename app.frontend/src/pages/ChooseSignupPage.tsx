@@ -1,4 +1,4 @@
-import { Box, Container, Heading } from "@chakra-ui/react";
+import { Box, Container } from "@chakra-ui/react";
 import ChooseSignup from "../components/Authentication/ChooseSignup";
 
 const ChooseSignupPage = () => {

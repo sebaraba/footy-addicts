@@ -1,6 +1,5 @@
-import { Box, Container, Heading, Image, Text, Flex } from "@chakra-ui/react";
+import { Box, Image, Text, Flex } from "@chakra-ui/react";
 import logo from "../../assets/logo_nostroke.svg";
-import SignupPage from "../../pages/SignupPage";
 import { useNavigate } from "react-router-dom";
 
 
@@ -9,8 +8,12 @@ const ChooseSignup = () => {
 
     const navigate = useNavigate();
 
-    const handleSelection = () => {
-        navigate("/signup");
+    const handleSelection = (isAdmin: Boolean) => {
+        if (isAdmin) {
+            navigate("/signup-admin");
+        } else {
+            navigate("/signup-user");
+        }
     }
 
     return (
@@ -38,7 +41,9 @@ const ChooseSignup = () => {
                 _hover={{ boxShadow: "xl", transform: "scale(1.05)" }}
                 _active={{ boxShadow: "lg", transform: "scale(0.98)" }}
                 transition="all 0.2s ease"
-                onClick= {handleSelection}
+                onClick={() => {
+                    handleSelection(true);
+                }}
             >
                 <Text fontSize="xl" fontWeight="bold" mb={2}>
                     I’m a Field Owner
@@ -59,7 +64,9 @@ const ChooseSignup = () => {
                 _hover={{ boxShadow: "xl", transform: "scale(1.05)" }}
                 _active={{ boxShadow: "lg", transform: "scale(0.98)" }}
                 transition="all 0.2s ease"
-                onClick={handleSelection}
+                onClick={() => {
+                    handleSelection(false);
+                }}
             >
                 <Text fontSize="xl" fontWeight="bold" mb={2}>
                     I’m a Player

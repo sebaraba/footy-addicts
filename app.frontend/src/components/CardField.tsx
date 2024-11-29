@@ -1,5 +1,6 @@
 import { Button, Card, Heading, Image, Text, Flex, Box } from "@chakra-ui/react"
 import arenaviola from "/Users/macbook/Desktop/footy-addicts/apps/app.frontend/src/assets/arenaviola.jpg"
+import { useNavigate } from "react-router-dom";
 
 // export interface CardFieldProps {
 //     teren: {
@@ -13,7 +14,16 @@ import arenaviola from "/Users/macbook/Desktop/footy-addicts/apps/app.frontend/s
 //     const { teren } = cardProps;
   
 
+
+
 export const CardField = () => {
+    
+    const navigate = useNavigate();
+
+    const handleBooking = () => {
+        navigate("/booking-fields");
+    };
+
     return (
         <Card maxW="sm" overflow="hidden">
             <Image
@@ -30,7 +40,7 @@ export const CardField = () => {
                     <Text fontSize="2xl" fontWeight="bold" color="black">
                         $450
                     </Text>
-                    <Button variant="solid" colorScheme="brand" mt="2">
+                    <Button variant="solid" colorScheme="brand" mt="2" onClick={handleBooking}>
                         Book Now
                     </Button>
                 </Box>
