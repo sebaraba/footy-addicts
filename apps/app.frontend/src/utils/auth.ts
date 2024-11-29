@@ -1,5 +1,4 @@
 export const isTokenValid = (token: string | null): boolean => {
-  console.log("string ", token);
 
   if (!token) return false;
 

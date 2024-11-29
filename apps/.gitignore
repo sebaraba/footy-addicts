@@ -8,10 +8,3 @@ apps/app.backend/.env
 apps/app.backend/.env.local
 apps/app.backend/.env.development
 apps/app.backend/.env.production
-
-node_modules/
-apps/app.frontend/dist
-apps/app.frontend/.env
-apps/app.frontend/.env.local
-apps/app.frontend/.env.development
-apps/app.frontend/.env.production
