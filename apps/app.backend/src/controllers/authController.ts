@@ -9,12 +9,30 @@ export const register = async (
   req: Request,
   res: Response
 ) => {
-  const { email, password } = req.body;
+  const {
+    email,
+    password,
+    firstName,
+    lastName,
+    phone,
+    address,
+    city,
+    country,
+    isAdmin,
+  } = req.body;
+
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
       email,
       password: hashedPassword,
+      firstName,
+      lastName,
+      phone,
+      address,
+      city,
+      country,
+      isAdmin,
     });
     await newUser.save();
     res
