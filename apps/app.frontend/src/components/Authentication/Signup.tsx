@@ -1,7 +1,8 @@
-import { Box, Button, FormControl, FormErrorMessage, FormLabel, HStack, Input, useToast, VStack } from "@chakra-ui/react";
+import { Box, Button, Center, FormControl, FormErrorMessage, FormLabel, HStack, Image, Input, Link, useToast, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { register } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
+import logo from "../../assets/logo_nostroke.svg";
 
 const Signup = (props: any) => {
 	const { isAdmin } = props;
@@ -137,9 +138,14 @@ const Signup = (props: any) => {
 		}
 	};
 
+	const handleLoginRedirect = () => {
+		navigate("/login");
+	};
+
 	return (
-		<Box as="form" onSubmit={handleSubmit} width="100%" maxWidth="800px" mx="auto">
-			<HStack align="start" spacing={8}>
+		<Box as="form" onSubmit={handleSubmit} w="500px" maxWidth="800px" mx="auto">
+			<Image src={logo} alt="logo" boxSize={"300px"} mx="auto" />
+			<HStack align="start" spacing={6} mt={-14}>
 				{/* Column 1: Email, Password, Confirm Password */}
 				<VStack spacing={4} align="stretch" flex="1">
 					<FormControl isInvalid={formErrors.email}>
@@ -257,14 +263,21 @@ const Signup = (props: any) => {
 
 			<Button
 				type="submit"
-				colorScheme="blue"
+				colorScheme="brand"
 				size="lg"
 				width="100%"
 				mt={6}
 				isLoading={isSubmitting}
 			>
-				Register
+				Sign Up
 			</Button>
+			<Link 
+			color="blue.500" 
+			onClick={handleLoginRedirect}
+			textAlign="center"
+			display="block" >
+				You already have an account? Login here.
+			</Link>
 		</Box>
 	);
 };

@@ -7,7 +7,7 @@ const SignupPage = () => {
 
   return (
     <Container centerContent={true}>
-      <Box w="300px">
+      <Box>
         <Signup isAdmin={isAdmin} />
       </Box>
     </Container>
