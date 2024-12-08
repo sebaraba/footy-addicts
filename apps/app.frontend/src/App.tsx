@@ -16,6 +16,8 @@ import MatchesHistoryPage from "./pages/MatchesHistoryPage";
 import FavoriteFieldsPage from "./pages/FavoriteFieldsPage";
 import ChooseSignupPage from "./pages/ChooseSignupPage";
 import BookingFieldsPage from "./pages/BookingFieldsPage"; 
+import BusinessCourtComponent from "./components/BusinessCourtsComponent";
+import CourtsComponent from "./components/CourtsComponent";
 
 
 export const App = () => {
@@ -42,6 +44,8 @@ export const App = () => {
 					<Route path="/card-fields" element={<CardField />} />
 					<Route path="/choose-signup" element={<ChooseSignupPage />} />
 					<Route path="/booking-fields" element={<BookingFieldsPage />} />
+					<Route path="/business-courts" element={<BusinessCourtComponent />} />
+					<Route path="/courts" element={<CourtsComponent />} />
 
 				</Routes>
 			{isAuthenticated && <Footer />}

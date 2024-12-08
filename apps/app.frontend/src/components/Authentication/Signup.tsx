@@ -113,7 +113,7 @@ const Signup = (props: any) => {
 			setIsSubmitting(true);
 
 			register(formValues)
-				.then((response) => {
+				.then(() => {
 					toast({
 						title: "Account Created",
 						description: "Successfully created account. Please login.",
@@ -124,7 +124,7 @@ const Signup = (props: any) => {
 					});
 					navigate('/login');
 				})
-				.catch((error) => {
+				.catch(() => {
 					toast({
 						title: "Account Creation Failed",
 						description: "Failed to create account. Try again later.",
