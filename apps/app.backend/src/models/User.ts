@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, ObjectId } from 'mongoose';
 
 interface IUser extends Document {
   email: string;
@@ -10,6 +10,8 @@ interface IUser extends Document {
   city: string;
   country: string;
   isAdmin: boolean;
+
+  courts: Array<ObjectId>;
 }
 
 const UserSchema: Schema = new Schema({
@@ -22,6 +24,7 @@ const UserSchema: Schema = new Schema({
   city: { type: String, required: true },
   country: { type: String, required: true },
   isAdmin: { type: Boolean, required: true },
+  courts: { type: Array<ObjectId>, required: true },
 });
 
 export default mongoose.model<IUser>('User', UserSchema);

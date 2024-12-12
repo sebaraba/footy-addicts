@@ -3,6 +3,20 @@ import { useState } from "react";
 import { register } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo_nostroke.svg";
+import validateForm from "../../utils/formValidations";
+
+type FormValues = {
+	email: string;
+	password: string;
+	confirmPassword: string;
+	firstName: string;
+	lastName: string;
+	phone: string;
+	address: string;
+	city: string;
+	country: string;
+	isAdmin: boolean;
+  };
 
 const Signup = (props: any) => {
 	const { isAdmin } = props;
@@ -22,121 +36,70 @@ const Signup = (props: any) => {
 	});
 	const [formErrors, setFormErrors] = useState({} as any);
 	const [isSubmitting, setIsSubmitting] = useState(false);
-
-	const validateField = (name: string, value: string) => {
-		const errors: any = {};
 	
-		switch (name) {
-			case "firstName":
-				if (!value) errors.firstName = "First name is required";
-				break;
-			case "lastName":
-				if (!value) errors.lastName = "Last name is required";
-				break;
-			case "email":
-				if (!value || !/\S+@\S+\.\S+/.test(value))
-					errors.email = "Invalid email address";
-				break;
-			case "password":
-				if (!value || value.length < 6)
-					errors.password = "Password must be at least 6 characters";
-				break;
-			case "confirmPassword":
-				if (value !== formValues.password)
-					errors.confirmPassword = "Passwords do not match";
-				break;
-			case "phone":
-				if (!value || !/^\d{10,15}$/.test(value))
-					errors.phone = "Phone number is invalid";
-				break;
-			case "address":
-				if (!value) errors.address = "Address is required";
-				break;
-			case "city":
-				if (!value) errors.city = "City is required";
-				break;
-			case "country":
-				if (!value) errors.country = "Country is required";
-				break;
-			default:
-				break;
-		}
-	
-		return errors;
-	};
-	
-	const handleChange = (e: any) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
-	
-		// Update form values
+	  
 		setFormValues((prevValues) => ({
-			...prevValues,
-			[name]: value,
+		  ...prevValues,
+		  [name]: value,
 		}));
-	
-		// Validate the field and update form errors
-		const fieldErrors = validateField(name, value);
-		setFormErrors((prevErrors: any) => ({
-			...prevErrors,
-			[name]: fieldErrors[name] || "",
-		}));
-	
-		// Additional validation for `confirmPassword` if `password` changes
+	  
+		let fieldError = validateForm(name, value, formValues);
+		let fieldErrors = {	[name]: fieldError	};
 		if (name === "password" || name === "confirmPassword") {
-			const confirmPasswordError = validateField(
-				"confirmPassword",
-				name === "password" ? formValues.confirmPassword : value
-			);
-			setFormErrors((prevErrors: any) => ({
-				...prevErrors,
-				confirmPassword: confirmPasswordError.confirmPassword || "",
-			}));
-		}
-	};
-	
+			let confirmPasswordError = validateForm("confirmPassword", name === "confirmPassword" ? value : formValues.confirmPassword, {
+				...formValues,
+				[name]: value,
+			})
 
-	const validate = () => {
-		const errors: any = {};
-		for (const [name, value] of Object.entries(formValues)) {
-			const fieldErrors = validateField(name, value as string);
-			Object.assign(errors, fieldErrors);
+			fieldErrors.confirmPassword = confirmPasswordError;
 		}
-		return errors;
-	};
-
-	const handleSubmit = (e: any) => {
+	  
+		setFormErrors((prevErrors: any) => ({
+		  ...prevErrors,
+		  ...fieldErrors,
+		}));
+	  };
+	  
+	  const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		const errors = validate();
+	  
+		const errors = Object.keys(formValues).reduce((acc, key) => {
+			return { ...acc, [key]: validateForm(key, formValues[key as keyof FormValues], formValues) };
+		  }, {});
+	  
 		setFormErrors(errors);
-
-		if (Object.keys(errors).length === 0) {
-			setIsSubmitting(true);
-
-			register(formValues)
-				.then(() => {
-					toast({
-						title: "Account Created",
-						description: "Successfully created account. Please login.",
-						status: "success",
-						duration: 5000,
-						isClosable: true,
-						position: "top",
-					});
-					navigate('/login');
-				})
-				.catch(() => {
-					toast({
-						title: "Account Creation Failed",
-						description: "Failed to create account. Try again later.",
-						status: "error",
-						duration: 5000,
-						isClosable: true,
-						position: "top",
-					});
-				})
-				.finally(() => setIsSubmitting(false));
+		console.log(errors);
+	  
+		if (Object.values(errors).every((error) => error === undefined)) {
+		  setIsSubmitting(true);
+	  
+		  register(formValues)
+			.then(() => {
+			  toast({
+				title: "Account Created",
+				description: "Successfully created account. Please login.",
+				status: "success",
+				duration: 5000,
+				isClosable: true,
+				position: "top",
+			  });
+			  navigate("/login");
+			})
+			.catch(() => {
+			  toast({
+				title: "Account Creation Failed",
+				description: "Failed to create account. Try again later.",
+				status: "error",
+				duration: 5000,
+				isClosable: true,
+				position: "top",
+			  });
+			})
+			.finally(() => setIsSubmitting(false));
 		}
-	};
+	  };
 
 	const handleLoginRedirect = () => {
 		navigate("/login");

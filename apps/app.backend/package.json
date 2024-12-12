@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "ts-node src/index.ts",
+    "serve": "nodemon src/index.ts",
     "format": "prettier --write ."
   },
   "keywords": [],
@@ -22,13 +22,14 @@
     "express-validator": "^7.2.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.6.1",
-    "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.17",
     "@types/jsonwebtoken": "^9.0.7",
-    "prettier": "^3.3.3"
+    "nodemon": "^3.1.7",
+    "prettier": "^3.3.3",
+    "ts-node": "^10.9.2"
   }
 }

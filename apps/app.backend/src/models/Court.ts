@@ -1,19 +1,23 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, ObjectId } from 'mongoose';
 
 interface ICourt extends Document {
+  userId: ObjectId;
   name: string;
-  available: boolean;
-  sportBase: mongoose.Types.ObjectId;
+  address: string;
+  description: string;
+  price: string;
 }
 
 const CourtSchema: Schema = new Schema({
-  name: { type: String, required: true },
-  available: { type: Boolean, required: true },
-  sportBase: {
+  userId: {
     type: Schema.Types.ObjectId,
-    ref: 'SportBase',
+    ref: 'User',
     required: true,
   },
+  name: { type: String, required: true },
+  address: { type: String, required: true },
+  description: { type: String, required: true },
+  price: { type: String, required: true },
 });
 
 export default mongoose.model<ICourt>('Court', CourtSchema);

@@ -5,14 +5,17 @@ import {
   validationResult,
 } from 'express-validator';
 import Court from '../models/Court';
+import User from '../models/User';
+import { ObjectId } from 'mongoose';
 
 export const getCourts = async (
   req: Request,
   res: Response
 ) => {
   try {
-    const courts = await Court.find();
-    res.json(courts);
+    let courts = await Court.find( { userId: req.params.userId });
+    
+    return res.json(courts ?? []);
   } catch (err: unknown) {
     if (err instanceof Error) {
       res.status(500).json({ error: err.message });
@@ -22,126 +25,42 @@ export const getCourts = async (
   }
 };
 
-export const getCourt = [
-  param('id').isMongoId().withMessage('Invalid ID format'),
-  async (req: Request, res: Response) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
+export const createCourt = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const {
+      address,
+      description,
+      name,
+      price,
+    } = req.body;
+
+    const user = await User.findOne({ _id: req.params.userId });
+    if (!user) {
       return res
-        .status(400)
-        .json({ errors: errors.array() });
+        .status(404)
+        .json({ error: 'User not found' });
     }
+    const newCourt = new Court({
+      address,
+      description,
+      name,
+      price,
+      userId: user._id,
+    });
+    await newCourt.save();
+    
+    user.courts.push(newCourt._id as ObjectId);
+    user.save();
 
-    try {
-      const court = await Court.findById(req.params.id);
-      if (!court)
-        return res
-          .status(404)
-          .json({ error: 'Court not found' });
-      res.json(court);
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        res.status(500).json({ error: err.message });
-      } else {
-        res.status(500).json({ error: 'Unknown error' });
-      }
+    res.json({ message: 'Court created successfully' })
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.status(500).json({ error: 'Unknown error' });
     }
-  },
-];
-
-export const createCourt = [
-  body('name')
-    .isString()
-    .withMessage('Name must be a string'),
-  body('location')
-    .isString()
-    .withMessage('Location must be a string'),
-  async (req: Request, res: Response) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res
-        .status(400)
-        .json({ errors: errors.array() });
-    }
-
-    try {
-      const newCourt = new Court(req.body);
-      const savedCourt = await newCourt.save();
-      res.status(201).json(savedCourt);
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        res.status(500).json({ error: err.message });
-      } else {
-        res.status(500).json({ error: 'Unknown error' });
-      }
-    }
-  },
-];
-
-export const updateCourt = [
-  param('id').isMongoId().withMessage('Invalid ID format'),
-  body('name')
-    .optional()
-    .isString()
-    .withMessage('Name must be a string'),
-  body('location')
-    .optional()
-    .isString()
-    .withMessage('Location must be a string'),
-  async (req: Request, res: Response) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res
-        .status(400)
-        .json({ errors: errors.array() });
-    }
-
-    try {
-      const updatedCourt = await Court.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        { new: true }
-      );
-      if (!updatedCourt)
-        return res
-          .status(404)
-          .json({ error: 'Court not found' });
-      res.json(updatedCourt);
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        res.status(500).json({ error: err.message });
-      } else {
-        res.status(500).json({ error: 'Unknown error' });
-      }
-    }
-  },
-];
-
-export const deleteCourt = [
-  param('id').isMongoId().withMessage('Invalid ID format'),
-  async (req: Request, res: Response) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res
-        .status(400)
-        .json({ errors: errors.array() });
-    }
-
-    try {
-      const deletedCourt = await Court.findByIdAndDelete(
-        req.params.id
-      );
-      if (!deletedCourt)
-        return res
-          .status(404)
-          .json({ error: 'Court not found' });
-      res.json({ message: 'Court deleted' });
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        res.status(500).json({ error: err.message });
-      } else {
-        res.status(500).json({ error: 'Unknown error' });
-      }
-    }
-  },
-];
+  }
+};

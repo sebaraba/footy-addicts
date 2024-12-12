@@ -33,7 +33,7 @@ app.use('/auth', authRoutes);
 app.use('/customers', customerRoutes);
 app.use('/owners', ownerRoutes);
 app.use('/sport-bases', sportBaseRoutes);
-app.use('/courts', courtRoutes);
+app.use('/users', courtRoutes);
 app.use('/bookings', bookingRoutes);
 
 // Read the connection string from environment variables
